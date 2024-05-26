@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Profile</title>
+  <style>@media (max-width: 767.98px) { .border-sm-start-none { border-left: none !important; } }
+  </style>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js'></script>
+  <style>
+    .navbar {
+      overflow: hidden;
+      background-color: #333;
+      position: fixed; /* Set the navbar to fixed position */
+      top: 0; /* Position the navbar at the top of the page */
+      width: 100%; /* Full width */
+      z-index: 5;
+    }
+
+
+    /* Links inside the navbar */
+    .navbar a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    /* Change background on mouse-over */
+    .navbar a:hover {
+      background: #ddd;
+      color: black;
+    }
+
+    /* Main content */
+    .main {
+      margin-top: 30px; /* Add a top margin to avoid content overlay */
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg" >
+    <div class="container">
+      <div class="navbar-header">
+        <h2 class="navbar-brand" style="color: white;">Rentify</h2>
+      </div>
+      <%if (user_name) { %>
+        <h6 style="color: white;">Welcome, <%= user_name %></h6>
+      <% }%>
+      <ul class="nav navbar-nav  navbar-right">
+        <%if (!token) { %>
+            <a href="/login">Login</a>
+        <% }else{ %>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        <%}%>
+        <li class="nav-item">
+          <a class="nav-link" href="/seller/Profile">Seller</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <section style="background-color: #eee; margin-top: 70px;">
+    <div class="container py-5">
+      <% properties.forEach( (property, index) => { %>
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+          <div class="card shadow-0 border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp"
+                      class="w-100" />
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <h5><%= property.property_name %></h5>
+                  <div class="d-flex flex-row">
+                    <span><%= property.property_type %></span>
+                  </div>
+                  <div class="mt-1 mb-0 text-muted small">
+                    <span><%= property.bhk %> BHK</span>
+                    <span class="text-primary"> • </span>
+                    <span><%= property.bathrooms %> Bathrooms</span>
+                  </div>
+                  <div class="mb-2 text-muted small">
+                    <%if (property.college) { %>
+                      <span> Near college - <%= property.college %></span>
+                      <br>
+                    <%}%>
+                    <%if (property.hospital) { %>
+                      <span> Near Hospital - <%= property.hospital %></span>
+                    <%}%>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                  </svg><span><%= property.location.area %>, <%= property.location.city %>, <%= property.location.state %> -
+                    <%= property.location.pincode %></span>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                  <!-- <div class="d-flex flex-row align-items-center mb-1">
+                    <h4 class="mb-1 me-1">$13.99</h4>
+                    <span class="text-danger"><s>$20.99</s></span>
+                  </div> -->
+                  <!-- <h6 class="text-success">Free shipping</h6> -->
+                  <div class="d-flex flex-column mt-4">
+                    <a href="/<%= property.user %>" class="btn btn-primary btn-sm">Interested</a>
+                    <%if (!property.like) { %>
+                      <div class="d-flex flex-column flex-row-reverse mt-5">
+                        <a id="<%= index+1 %>" href="/addlike/<%= property._id %>" class="mdi mdi-heart fs-18" style="color: rgb(220, 218, 218); background-color: white; border: none;"
+                        onclick="setColor(id)" ></a>
+                        <span><%= property.like_counts %></span>
+                        <!-- <a href="#"><i class="mdi mdi-heart fs-18 btn btn-link" style="color: #e0d5d5;"></i></a><Span>100</Span> -->
+                      </div>
+                    <% }else{ %>
+                      <div class="d-flex flex-column flex-row-reverse mt-5">
+                        <a id="<%= index+1 %>" href="/dislike/<%= property._id %>" class="mdi mdi-heart fs-18" style="color: red; background-color: white; border: none;"
+                         ></a>
+                        <span><%= property.like_counts %></span>
+                        <!-- <a href="#"><i class="mdi mdi-heart fs-18 btn btn-link" style="color: #e0d5d5;"></i></a><Span>100</Span> -->
+                      </div>
+                      <% }%>
+                          
+                       
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </section>
+  <script>;
+
+    function setColor(id) {
+        var property = document.getElementById(id);
+        if (property.style.color != "red") {
+            property.style.color = "red"      
+        }
+        else {
+            property.style.color = rgb(220, 218, 218)
+        }
+    }
+  </script>
+</body>
+</html>
