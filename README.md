@@ -41,3 +41,7 @@ To get started with this project, follow these steps:
     nodemon server.js
     ```
 5. Access the application in your web browser at [http://localhost:3000](http://localhost:8000).
+
+![Screenshot (13)](https://github.com/akgawai31/Rentify/assets/76953374/d322469d-31d2-4edf-8add-6323c3d0293e)
+
+![Screenshot (14)](https://github.com/akgawai31/Rentify/assets/76953374/c114c946-53e2-4b8c-b394-3fdda425383e)
