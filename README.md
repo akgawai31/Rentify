@@ -12,7 +12,15 @@ Expectation: Showcase advanced development capabilities and creative problem-sol
 - Part III – Bonus Section (Optional):
 Objective: Go above and beyond by tackling additional challenges.
 Expectations: Demonstrate exceptional skill and ambition by implementing bonus functionalities.
+## Functionalities
 
+- **Authentication:** Secure user authentication using jwt.
+- **like/dislike:** user can like property on clicking heart button, once user click on like button it's color change to red and
+    if user again click the button it will remove the like from property
+- **Delete Property:** Remove unwanted property with a simple delete option.
+- **Update Property:** Edit and update property as your content evolves.
+- **View Properties:** Explore and see the properties published by sellers.
+- 
 ## Getting Started
 
 To get started with this project, follow these steps:
