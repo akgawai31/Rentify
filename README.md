@@ -20,7 +20,7 @@ Expectations: Demonstrate exceptional skill and ambition by implementing bonus f
 - **Delete Property:** Remove unwanted property with a simple delete option.
 - **Update Property:** Edit and update property as your content evolves.
 - **View Properties:** Explore and see the properties published by sellers.
-- 
+  
 ## Getting Started
 
 To get started with this project, follow these steps:
