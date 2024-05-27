@@ -7,8 +7,6 @@ const {jwtAuthMiddleware, getUser} = require('./../auth');
 router.get('/', async (req, res) =>{
     try{
         const properties = await property.find();
-        console.log(req.query.id)
-        console.log(req.query.name)
         for(let key in properties){
             likeby = properties[key].like_by;
             properties[key]['like'] = likeby.includes(req.query.id)

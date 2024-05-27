@@ -72,7 +72,6 @@ router.post('/login', async (req, res) => {
         });
         context['query'] = query
         context["messages"] = req.flash('message')
-        console.log(context)
         return res.render('sellerView/profile', context)
     }
     catch(err){
