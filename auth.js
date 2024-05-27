@@ -7,7 +7,7 @@ const jwtAuthMiddleware = (req, res, next) => {
     const token = req.cookies.access_token;
     if (!token) {
         console.log("Token not found")
-        return res.redirect('/login')
+        return res.redirect('./login')
     }
     try{
         // Verify the JWT token

@@ -12,33 +12,6 @@ const { error } = require('jquery');
 const OAuth2 = google.auth.OAuth2;
 
 
-//main page route
-router.get('/', async (req, res) =>{
-    try{
-        const properties = await property.find();
-        console.log(req.query.id)
-        console.log(req.query.name)
-        for(let key in properties){
-            likeby = properties[key].like_by;
-            properties[key]['like'] = likeby.includes(req.query.id)
-            properties[key]['like_counts'] = likeby.length
-        }
-        
-        context = {properties};
-        const token = req.cookies.access_token;
-        context['token'] = token;
-        context['user_name'] = req.query.name
-        // context['user_id'] = req.query.id
-        return res.render('index', context)
-    }
-    catch(err){
-        console.log("data not found")
-        return res.status(400).json({error : "Internal server error"})
-    }   
-})
-
-
-
 //login route
 router.post('/login', async (req, res) => {
     try{
@@ -62,7 +35,7 @@ router.post('/login', async (req, res) => {
      catch(err){
         console.log(err);
         req.flash('error', err);
-        res.redirect('./')
+        res.redirect('/login')
      } 
  })
 
@@ -72,7 +45,7 @@ router.post('/login', async (req, res) => {
        const data = req.body;
        const newPerson = new User(data);
        const savedPerson = await newPerson.save();
-       console.log("data saved");
+       console.log("Registered Successfully");
        req.flash('message', "Registered Successfully !!!")
        return res.redirect('/signup')
     }
@@ -199,7 +172,7 @@ const createTransporter = async () => {
 
 
 //see the details of the Seller and mail them
-router.get('/:id', jwtAuthMiddleware, async (req, res) => {
+router.get('/details/:id', jwtAuthMiddleware, async (req, res) => {
     try{
         const id = req.params.id;
         const seller = await User.findOne({_id:id})

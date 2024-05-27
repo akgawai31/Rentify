@@ -28,6 +28,13 @@ router.get('/', async (req, res) =>{
     }   
 })
 
+router.get('/seller/login', async (req, res) =>{
+    return res.render("sellerView/login", {messages: req.flash('message')})
+})
+
+router.get('/seller/signup', async (req, res) =>{
+    return res.render("sellerView/signup", {messages: req.flash('message')})
+})
 
 router.get('/seller/add', jwtAuthMiddleware, async (req, res) =>{
     try{

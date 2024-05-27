@@ -7,6 +7,55 @@ const {jwtAuthMiddleware, generateToken} = require('../auth');
 const querystring = require('querystring'); 
 
 
+// registartion route
+router.post('/signup', async (req, res) => {
+    try{
+       const data = req.body;
+       const newPerson = new User(data);
+       newPerson.role = 'seller';
+       const savedPerson = await newPerson.save();
+       console.log("Seller Registered Successfully");
+       req.flash('message', "Registered Successfully !!!")
+       return res.redirect('/seller/signup')
+    }
+    catch(err){
+       console.log("error", err)
+       req.flash('message', "User not Registered !!!")
+       return res.redirect('/seller/signup');
+    } 
+ })
+
+ //login route
+router.post('/login', async (req, res) => {
+    try{
+        const {email, password} = req.body;
+        const user = await User.findOne({email: email})
+        if( !user || user.role === "buyer" || !(await user.comparePassword(password))){
+            req.flash('message', "Invalid Email or Password");
+            return res.redirect('./login');
+        }
+        //generate Token 
+        const user_name = user.first_name+ " " +user.last_name;
+        const payload = {
+            id: user.id,
+            role:user.role,
+            name:user_name
+        }
+        const token = generateToken(payload);
+        res.cookie("access_token", token, { httpOnly: true, expiresIn: "1h" });
+        res.redirect('/seller/profile')
+     }
+     catch(err){
+        console.log(err);
+        req.flash('error', err);
+        res.redirect('./')
+     } 
+ })
+
+
+
+
+
  router.get('/profile',jwtAuthMiddleware, async (req, res) =>{
     try{
         if(req.user.role === 'buyer'){
@@ -23,12 +72,13 @@ const querystring = require('querystring');
         });
         context['query'] = query
         context["messages"] = req.flash('message')
+        console.log(context)
         return res.render('sellerView/profile', context)
     }
     catch(err){
         console.log(err)
         req.flash('message', err)
-        return res.redirect('/login')
+        return res.redirect('/seller/login')
     }   
 })
 

@@ -39,10 +39,6 @@ const PropertySchema = new mongoose.Schema({
         ref : "User",
         required: true
     },
-    img: {
-        data: Buffer,
-        contentType: String
-    },
     like_by :{
         type: [mongoose.Schema.Types.ObjectId]
     },
