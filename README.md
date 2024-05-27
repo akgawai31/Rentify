@@ -21,6 +21,7 @@ Expectations: Demonstrate exceptional skill and ambition by implementing bonus f
 - **Update Property:** Edit and update property as your content evolves.
 - **View Properties:** Explore and see the properties published by sellers.
 - **Sending email to both seller and buyer:** Once user click on Interested button mail will be sent to both seller and buyer
+- ##Deployed Link: [Rentify Project Link](https://rentify-7c6e.onrender.com) 
   
 ## Getting Started
 
