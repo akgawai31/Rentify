@@ -42,6 +42,19 @@ To get started with this project, follow these steps:
     ```
 5. Access the application in your web browser at [http://localhost:3000](http://localhost:8000).
 
+## Routes and Screenshots
+1. main page,  Route -> localhost:/
+![Screenshot (14)](https://github.com/akgawai31/Rentify/assets/76953374/c114c946-53e2-4b8c-b394-3fdda425383e)
+
+2. Buyers Login, Route -> localhost:/login
 ![Screenshot (13)](https://github.com/akgawai31/Rentify/assets/76953374/d322469d-31d2-4edf-8add-6323c3d0293e)
 
-![Screenshot (14)](https://github.com/akgawai31/Rentify/assets/76953374/c114c946-53e2-4b8c-b394-3fdda425383e)
+3. Buyers Signup, Route -> localhost:/login
+
+4. Seller Signup, Route -> localhost:/seller/singup
+
+5. Seller Login, Route -> localhost:/seller/login
+> [!NOTE] > To access following routes user must be logged in as Seller.
+6. Add Property, Route -> localhot:/seller/add/:propertyID
+7. Delete Property, Route -> localhot:/seller/delete/:propertyID
+8. Update Property, Route -> localhost:/seller/update/:propertyID
